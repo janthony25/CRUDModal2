@@ -1,0 +1,67 @@
+﻿@model List<CRUDModal2.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="container">
+    <button class="btn btn-primary" id="btnAdd">Add Customer</button>
+</div>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact #</th>
+                <th>Date Added</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tblBody">
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="CustomerModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken() <!-- This automatically adds the anti-forgery token -->
+
+                <input type="hidden" id="CustomerId" asp-for="@Model[0].CustomerId" />
+                <div class="mb-2">
+                    <label asp-for="@Model[0].CustomerName"></label>
+                    <input id="CustomerName" asp-for="@Model[0].CustomerName" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label asp-for="@Model[0].CustomerEmail"></label>
+                    <input id="CustomerEmail" asp-for="@Model[0].CustomerEmail" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label asp-for="@Model[0].CustomerNumber"></label>
+                    <input id="CustomerNumber" asp-for="@Model[0].CustomerNumber" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="Save" onclick="AddCustomer();">Save changes</button>
+                <button type="submit" class="btn btn-primary" id="Update" onclick="Update();" style="display:none">Update</button>
+                <button class="btn btn-secondary" id="btnCloseModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/customer.js"></script>
